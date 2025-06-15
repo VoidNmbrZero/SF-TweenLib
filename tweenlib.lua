@@ -1,6 +1,5 @@
 --@name tweenLib
 --@author Trench Rat
---@client
 
 
 twLib = {}
