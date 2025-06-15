@@ -68,9 +68,9 @@ function Tween:_update(dt)
         if self.onCompleted then self.onCompleted(self) end
     else
         local t = self.style(self.elapsed / self.duration)
-        if type(self.target) == "number" then self.value = math.lerp(self.value, self.target, t)
-        elseif type(self.target) == "Vector" then self.value = math.lerpVector(t, self.value, self.target)
-        elseif type(self.target) == "Angle" then self.value = math.lerpAngle(t, self.value, self.target) end
+        if type(self.target) == "number" then self.value = math.lerp(self.start, self.target, t)
+        elseif type(self.target) == "Vector" then self.value = math.lerpVector(t, self.start, self.target)
+        elseif type(self.target) == "Angle" then self.value = math.lerpAngle(t, self.start, self.target) end
     end
     
     if self.onUpdated then self.onUpdated(self) end
