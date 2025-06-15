@@ -1,6 +1,6 @@
 --@name tweenLib
 --@author Trench Rat
-
+--@shared
 
 twLib = {}
 local tweens = {}
@@ -14,9 +14,9 @@ EASE = { -- oh zrya ya tuda polez..
     CUBIC_IN = function(t) return t * t * t end,
     CUBIC_OUT = function(t) return (t - 1) * (t - 1) * (t - 1) + 1 end,
     CUBIC_IN_OUT = function(t) return t < 0.5 and 4 * t * t * t or (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 end,
-    SINE_IN = function(t) return 1 - cos(t * math.pi / 2) end,
-    SINE_OUT = function(t) return sin(t * math.pi / 2) end,
-    SINE_IN_OUT = function(t) return -0.5 * (cos(math.pi * t) - 1) end
+    SINE_IN = function(t) return 1 - math.cos(t * math.pi / 2) end,
+    SINE_OUT = function(t) return math.sin(t * math.pi / 2) end,
+    SINE_IN_OUT = function(t) return -0.5 * (math.cos(math.pi * t) - 1) end
 }
 
 
