@@ -101,7 +101,6 @@ function Tween.new(start, target, duration, style, onUpdated, onCompleted)
     self.onCompleted = onCompleted
     self.onUpdated = onUpdated
     
-    tweens[self.id] = self
     return self
 end
 
