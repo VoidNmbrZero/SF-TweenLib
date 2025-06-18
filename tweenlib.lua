@@ -105,7 +105,7 @@ function Tween.new(start, target, duration, style, onUpdated, onCompleted)
 end
 
 function Tween:_update(dt)
-    if self.completed == true then return end
+    if self.completed == true or self.playing == false then return end
     
     self.elapsed = self.elapsed + dt
     
@@ -134,7 +134,7 @@ function Tween:play()
 end
 
 function Tween:pause()
-    self.completed = true
+    self.playing = false
 end
 
 function Tween:restart()
