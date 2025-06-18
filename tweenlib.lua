@@ -2,11 +2,9 @@
 --@author Trench Rat
 --@shared
 
-tweenLib = {}
-local tweens = {}
-
-
-tweenLib.EASE = { -- oh zrya ya tuda polez..
+Tween = {}
+Tween.__index = Tween
+EASE = { -- oh zrya ya tuda polez..
     LINEAR = function(t) return t end,
     QUAD_IN = function(t) return t * t end,
     QUAD_OUT = function(t) return t * (2 - t) end,
@@ -88,25 +86,7 @@ tweenLib.EASE = { -- oh zrya ya tuda polez..
 }
 
 
-tweenLib.Tween = {}
-tweenLib.Tween.__index = tweenLib.Tween
-
-
-function tweenLib.updateAll(dt)
-    local removing = {}
-    
-    for id, tween in pairs(tweens) do
-        if tween.completed then 
-            table.insert(removing, id)
-        else
-            tween:_update(dt)
-        end
-    end
-    
-    for _, id in ipairs(removing) do tweens[id] = nil end
-end
-
-function tweenLib.Tween.new(start, target, duration, style, onUpdated, onCompleted)
+function Tween.new(start, target, duration, style, onUpdated, onCompleted)
     local self = setmetatable({}, Tween)
     
     self.duration = duration
@@ -114,7 +94,8 @@ function tweenLib.Tween.new(start, target, duration, style, onUpdated, onComplet
     self.target = target
     self.style = style
     self.value = start
-    self.id = "tween@"..string.sub(tostring({}), 8)
+    self.playing = false
+    self.id = "tween#"..string.sub(tostring({}), 8)
     self.completed = false
     self.elapsed = 0
     self.onCompleted = onCompleted
@@ -124,7 +105,7 @@ function tweenLib.Tween.new(start, target, duration, style, onUpdated, onComplet
     return self
 end
 
-function tweenLib.Tween:_update(dt)
+function Tween:_update(dt)
     if self.completed == true then return end
     
     self.elapsed = self.elapsed + dt
@@ -133,6 +114,8 @@ function tweenLib.Tween:_update(dt)
         self.elapsed = self.duration
         self.value = self.target
         self.completed = true
+        self.playing = false
+        hook.remove("Think", self.id.." updater")
         if self.onCompleted then self.onCompleted(self) end
     else
         local t = self.style(self.elapsed / self.duration)
@@ -144,14 +127,26 @@ function tweenLib.Tween:_update(dt)
     if self.onUpdated then self.onUpdated(self) end
 end
 
-function tweenLib.Tween:cancel()
-    self.completed = true  
+function Tween:play()
+    if self.playing == true then return end
+    hook.add("Think", self.id.." updater", function() self:_update(timer.frametime()) end)
+    self.completed = false
+    self.playing = true
 end
 
-function tweenLib.Tween:reset()
+function Tween:pause()
+    self.completed = true
+end
+
+function Tween:restart()
     self.elapsed = 0
     self.value = self.start
-    self.completed = false
+    self:play()
 end
 
-return tweenLib
+function Tween:destroy()
+    self:pause()
+    self = nil
+end
+
+return Tween
