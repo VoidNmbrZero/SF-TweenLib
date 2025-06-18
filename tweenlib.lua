@@ -2,11 +2,11 @@
 --@author Trench Rat
 --@shared
 
-twLib = {}
+tweenLib = {}
 local tweens = {}
 
 
-EASE = { -- oh zrya ya tuda polez..
+tweenLib.EASE = { -- oh zrya ya tuda polez..
     LINEAR = function(t) return t end,
     QUAD_IN = function(t) return t * t end,
     QUAD_OUT = function(t) return t * (2 - t) end,
@@ -88,11 +88,11 @@ EASE = { -- oh zrya ya tuda polez..
 }
 
 
-Tween = {}
-Tween.__index = Tween
+tweenLib.Tween = {}
+tweenLib.Tween.__index = tweenLib.Tween
 
 
-function updateAll(dt)
+function tweenLib.updateAll(dt)
     local removing = {}
     
     for id, tween in pairs(tweens) do
@@ -106,7 +106,7 @@ function updateAll(dt)
     for _, id in ipairs(removing) do tweens[id] = nil end
 end
 
-function Tween.new(start, target, duration, style, onUpdated, onCompleted)
+function tweenLib.Tween.new(start, target, duration, style, onUpdated, onCompleted)
     local self = setmetatable({}, Tween)
     
     self.duration = duration
@@ -124,7 +124,7 @@ function Tween.new(start, target, duration, style, onUpdated, onCompleted)
     return self
 end
 
-function Tween:_update(dt)
+function tweenLib.Tween:_update(dt)
     if self.completed == true then return end
     
     self.elapsed = self.elapsed + dt
@@ -144,12 +144,14 @@ function Tween:_update(dt)
     if self.onUpdated then self.onUpdated(self) end
 end
 
-function Tween:cancel()
+function tweenLib.Tween:cancel()
     self.completed = true  
 end
 
-function Tween:reset()
+function tweenLib.Tween:reset()
     self.elapsed = 0
     self.value = self.start
     self.completed = false
 end
+
+return tweenLib
