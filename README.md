@@ -16,10 +16,10 @@ local Tween = require("TweenLib")
 > Returns a brand new `Tween`
 
 + start: `number` | `Vector` | `Angle` | `Color`
-  + value Tween begins from
+  + value `Tween` begins from
 
 + target: `number` | `Vector` | `Angle` | `Color`
-  + value Tween ends at (type must match start)
+  + value `Tween` ends at (type must match start)
 
 + duration: `number`
   + time (in seconds) it will take to reach target
@@ -29,11 +29,11 @@ local Tween = require("TweenLib")
   + **NOTE**: for linear easing you should use a function that returns it's first and the only argument
   
 + onUpdated: `function(self)?`
-  + (optional) function called upon Tween updating
+  + (optional) function called upon `Tween` updating
   + passed arguments: `self`
   
 + onCompleted: `function(self?`
-  + (optional) function called upon Tween reaching it's target
+  + (optional) function called upon `Tween` reaching it's target
   + passed arguments: `self`
 
 #### Tween:play() -> void
@@ -46,7 +46,7 @@ local Tween = require("TweenLib")
 > Starts `Tween` from the beginning
 
 #### Tween:destroy() -> void
-> Pauses and "destroys" `Tween`, setting it's table to nil
+> Pauses and "destroys" `Tween`, setting it's table to `nil`
 
 ### EXAMPLE:
 
@@ -57,6 +57,6 @@ local Tween = require("TweenLib")
 --@include https://github.com/VoidNmbrZero/SF-TweenLib/raw/refs/heads/main/tweenlib.lua as TweenLib
 local Tween = require("TweenLib")
 
-Tween.new(chip():getPos(), chip():getPos+Vector(0, 0, 50), 3, math.easeInOutExpo, function(self) chip():setPos(self.value) end, function(self) self:destroy() end):play()
+Tween.new(chip():getPos(), chip():getPos+Vector(0, 0, 50), 3, math.easeInOutExpo, function(self) chip():setPos(self.value) end, function(self) self:restart() end):play()
 ```
-Moves the chip by 50 units up, under the duration of 3 seconds with exponentional in & out ease.
+Moves the chip by 50 units up, under the duration of 3 seconds with exponentional in & out ease, infinetely.
