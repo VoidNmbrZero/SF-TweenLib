@@ -41,9 +41,9 @@ function Tween:_update(dt)
     if self.elapsed >= self.duration then
         self.elapsed = self.duration
         self.value = self.target
+        hook.remove("Think", self.id.." updater")
         self.completed = true
         self.playing = false
-        hook.remove("Think", self.id.." updater")
         if self.onCompleted then self.onCompleted(self) end
     else
         local t = self.style(self.elapsed / self.duration)
@@ -75,6 +75,7 @@ end
 
 function Tween:destroy()
     self:pause()
+    hook.remove("Think", self.id.." updater")
     self = nil
 end
 
