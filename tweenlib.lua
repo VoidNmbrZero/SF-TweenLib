@@ -51,9 +51,8 @@ function Tween:_update(dt)
         elseif type(self.target) == "Vector" then self.value = math.lerpVector(t, self.start, self.target)
         elseif type(self.target) == "Angle" then self.value = math.lerpAngle(t, self.start, self.target)
         elseif type(self.target) == "Color" then self.value = lerpColor(t, self.start, self.target) end
+        if self.onUpdated then self.onUpdated(self) end
     end
-    
-    if self.onUpdated then self.onUpdated(self) end
 end
 
 function Tween:play()
