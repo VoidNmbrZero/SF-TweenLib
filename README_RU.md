@@ -1,6 +1,10 @@
-# TweenLib
+# ИНФОРМАЦИЯ:
 
-Простецкая и понятная библеотека анимирования переменных для [Starfall-Ex](https://github.com/thegrb93/StarfallEx).
+###### README на другом языке: [`ENG`](https://github.com/VoidNmbrZero/SF-TweenLib/blob/main/README_RU.md)/`RUS`
+
+Простая и понятная библеотека анимирования переменных для [Starfall-Ex](https://github.com/thegrb93/StarfallEx).
+
+# ДОКУМЕНТАЦИЯ:
 
 ### ИСПОЛЬЗОВАНИЕ: 
 
