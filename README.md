@@ -1,8 +1,10 @@
-# TweenLib
+# ABOUT:
 
 ###### README in other languages: `ENG`/[`RUS`](https://github.com/VoidNmbrZero/SF-TweenLib/blob/main/README_RU.md)
 
 A simple, easy to understand [Starfall-Ex](https://github.com/thegrb93/StarfallEx) tweening library.
+
+# DOCUMENTATION:
 
 ### USAGE: 
 
