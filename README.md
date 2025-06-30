@@ -29,8 +29,7 @@ local Tween = require("TweenLib")
   + time (in seconds) it will take to reach target
 
 + style: `function`
-  + an ease function from math library
-  + **NOTE**: for linear easing you should use a function that returns it's first and the only argument
+  + a function from `Ease` table defined at the EOF
   
 + onUpdated: `function(self)?`
   + (optional) function called upon `Tween` updating
@@ -61,6 +60,6 @@ local Tween = require("TweenLib")
 --@include https://github.com/VoidNmbrZero/SF-TweenLib/raw/refs/heads/main/tweenlib.lua as TweenLib
 local Tween = require("TweenLib")
 
-Tween.new(chip():getPos(), chip():getPos+Vector(0, 0, 50), 3, math.easeInOutExpo, function(self) chip():setPos(self.value) end, function(self) self:restart() end):play()
+Tween.new(chip():getPos(), chip():getPos+Vector(0, 0, 50), 3, Ease.Expo.InOut, function(self) chip():setPos(self.value) end, function(self) self:restart() end):play()
 ```
 Moves the chip by 50 units up, under the duration of 3 seconds with exponentional in & out ease, infinetely.
