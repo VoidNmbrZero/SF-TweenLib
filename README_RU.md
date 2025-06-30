@@ -29,8 +29,7 @@ local Tween = require("TweenLib")
   + время (в секундах) за которое происходит анимирование
 
 + style: `function`
-  + функция плавности из библеотеки math
-  + **ЗАМЕТКА**: для линейной плавности ипользуйте функцию возвращающию первый аргумент
+  + одна из функций из таблицы `Ease` находящейся в конце файла
   
 + onUpdated: `function(self)?`
   + (необяз.) функция вызываемая при обновлении `Tween`-а
@@ -61,6 +60,6 @@ local Tween = require("TweenLib")
 --@include https://github.com/VoidNmbrZero/SF-TweenLib/raw/refs/heads/main/tweenlib.lua as TweenLib
 local Tween = require("TweenLib")
 
-Tween.new(chip():getPos(), chip():getPos+Vector(0, 0, 50), 3, math.easeInOutExpo, function(self) chip():setPos(self.value) end, function(self) self:restart() end):play()
+Tween.new(chip():getPos(), chip():getPos+Vector(0, 0, 50), 3, Ease.Expo.InOut, function(self) chip():setPos(self.value) end, function(self) self:restart() end):play()
 ```
 Двигает чип на 50 единиц вверх, в течении 3 секунд с экспонентальной плавностью в обе стороны, бесконечно.
