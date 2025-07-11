@@ -220,14 +220,6 @@ Ease = {
             if t<0.5 then return Ease.Bounce.In(t*2)*0.5 end
             return Ease.Bounce.Out(t*2-1)*0.5+0.5
         end
-    },
-    
-    Smooth = {
-        In = function(t) return t*t*(3-2*t) end,
-        Out = function(t) return 1-t*t*(3-2*t) end,
-        InOut = function(t) return t<0.5 
-            and 2*t*t*(3-2*t) 
-            or 1-2*(1-t)*(1-t)*(3-2*(1-t)) end
     }
 }
 
