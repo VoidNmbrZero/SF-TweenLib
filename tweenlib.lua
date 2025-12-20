@@ -95,6 +95,24 @@ function Tween:destroy()
     self = nil
 end
 
+Simple = {
+    End = function(self) self:destroy() end,
+    Loop = function(self) self:restart() end,
+    PingPong = function(self)
+        local start = self.start
+        local target = self.target
+        
+        self.start = target
+        self.target = start
+        
+        self:restart()
+    end,
+    Pos = function(ent) return function(self) ent:setPos(self.value) end end,
+    Ang = function(ent) return function(self) ent:setAngles(self.value) end end,
+    Color = function(ent) return function(self) ent:setColor(self.value) end end,
+    Scale = function(ent) return function(self) ent:setScale(self.value) end end
+}
+
 Ease = {
     Linear = function(t) return t end,
 
